@@ -1,9 +1,8 @@
-//package src.main.java;
+package ru.nsu.fit.lab2;
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,9 +13,9 @@ public class Main {
         String fileName = scanner.nextLine();
         String reference = scanner.nextLine();
         FileInputStream stream = new FileInputStream(fileName);
-        InputStreamReader input = new InputStreamReader(stream, StandardCharsets.UTF_8);
+        BufferedInputStream input = new BufferedInputStream(stream);
         Finder finder = new Finder();
-        ArrayList<Integer> res = finder.SubStringFinder(input, reference);
+        ArrayList<Integer> res = finder.subStringFinder(input, reference);
         int size = res.size();
         if (size == 0) {
             System.out.println("No occurrences found");
