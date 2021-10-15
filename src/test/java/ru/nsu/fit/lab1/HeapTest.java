@@ -33,7 +33,8 @@ public class HeapTest {
     @MethodSource("arrayMaker")
     void comp(int[] array) {
         int[] res = array.clone();
-        sort(array);
+        Heap heap = new Heap();
+        heap.heapsort(array);
         Arrays.sort(res);
         assertArrayEquals(array, res);
     }
@@ -49,7 +50,7 @@ class RandomHeapTest {
         for (int i = 0; i < 10000; i++) {
             randarr[i] = r.nextInt();
         }
-        heap.caller(randarr, randarr.length);
+        heap.heapsort(randarr);
         int[] answer = Arrays.copyOf(randarr, randarr.length);
         Arrays.sort(answer);
         assertArrayEquals(answer, randarr);
