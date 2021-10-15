@@ -4,10 +4,10 @@ class Heap {
     /**
      * calls other small functions, makes steps of algorithm
      * @param arr - input array
-     * @param quantity - number of elements in array
      */
-    public void caller(int[] arr, int quantity) {
-        int[] heap = new int[quantity];
+    public void heapsort(int[] arr) {
+        int quantity=arr.length;
+        int[] heap = new int[quantity]; //potentially unsafe
         for (int i = 0; i < quantity; i++) {
             heap[i] = arr[i];
             siftUp(i, heap);
@@ -25,7 +25,7 @@ class Heap {
      * @param i - element index 1
      * @param j - element index 2
      */
-    public static void swap(int[] arr, int i, int j) {
+    private static void swap(int[] arr, int i, int j) {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
     }
 
