@@ -30,9 +30,6 @@ public class Finder {
         return Pi;
     }
 
-    //a flag to stop reading from input stream
-    byte stopper = 0;
-
     /**
      * creates a char array to be tested
      *
@@ -55,7 +52,7 @@ public class Finder {
                 }
             }
         } catch (IOException ioException) {
-            stopper = 1;
+            prev[0] = '0';
         }
         return prev;
     }
@@ -75,25 +72,25 @@ public class Finder {
         candidate = candidateCreator(in, len, candidate, -1);
         int[] refPrefix = prefixFunc(candidate, len);
         int[] candPrefix = prefixFunc(candidate, len);
-        int counter = 0;
-        int temp;
-        while (stopper == 0) {
-            temp = move(len,candPrefix,refPrefix);
+        int temp, counter = 0;
+        while (candidate[0] != '0') {
+            temp = move(len, candPrefix, refPrefix);
             if (temp == len) {
                 arrayList.add(counter);
             }
             counter += temp;
             candidate = candidateCreator(in, len, candidate, temp);
-            candPrefix=prefixFunc(candidate,len);
+            candPrefix = prefixFunc(candidate, len);
         }
         return arrayList;
     }
 
     /**
      * iterating function that compares prefixes
-     * @param len - length of arrays
+     *
+     * @param len        - length of arrays
      * @param candPrefix - current array being tested
-     * @param refPrefix - reference array
+     * @param refPrefix  - reference array
      * @return - returns the number of characters to move reader to
      */
     private int move(int len, int[] candPrefix, int[] refPrefix) {
