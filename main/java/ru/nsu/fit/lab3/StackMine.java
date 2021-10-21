@@ -30,6 +30,7 @@ public class StackMine<T> {
 
     /**
      * resizes array multiplying by 2
+     *
      * @return - 1 or 0 depending on success of operation
      * handles possible exceptions for the caller
      */
@@ -45,6 +46,7 @@ public class StackMine<T> {
 
     /**
      * pushes single elements to the stack
+     *
      * @param elem - element to be pushed
      * @return - 1 or 0 depending on success
      */
@@ -65,6 +67,7 @@ public class StackMine<T> {
 
     /**
      * concatenates stacks
+     *
      * @param entry - a stack object to be pushed into existing stack
      * @return - 1 or 0 depending on success
      */
@@ -73,7 +76,7 @@ public class StackMine<T> {
         entryLen = entry.length;
         if (entryLen + size <= capacity) {
             System.arraycopy(entry, 0, containArray, size, entryLen);
-            size+=entryLen;
+            size += entryLen;
         } else {
             success = resize();
             if (success == 0) return 0;
@@ -84,18 +87,20 @@ public class StackMine<T> {
 
     /**
      * pops a single element from stack
+     *
      * @return - first stack element (last in container)
      * @throws NullPointerException - if an array is empty
      */
     public T pop() throws NullPointerException {
-        T elem = containArray[size-1];
-        containArray[size-1]=null;
+        T elem = containArray[size - 1];
+        containArray[size - 1] = null;
         size--;
         return elem;
     }
 
     /**
      * pops several elements off
+     *
      * @param num - number of elements to be popped
      * @return - a stack-like array
      * @throws NullPointerException - if a container is empty
@@ -105,10 +110,10 @@ public class StackMine<T> {
         int j = num;
         for (int i = 1; i <= num; i++) {
             current[j - 1] = containArray[size - i];
-            containArray[size-i]=null;
+            containArray[size - i] = null;
             j--;
         }
-        size-=num;
+        size -= num;
         return current;
     }
 
