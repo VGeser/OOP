@@ -5,27 +5,20 @@ import java.util.Arrays;
 public class StackMine<T> {
     private T[] containArray;
     private static int size; //existing elements
-    private static int capacity;//declared elements,field necessary for constructor default values
+
+    public StackMine(int cap) {
+        try {
+            containArray = (T[]) new Object[cap];
+        } catch (OutOfMemoryError out) {
+            out.printStackTrace();
+        }
+    }
 
     /**
      * @return number of initialized elements in container
      */
     public int size() {
         return size;
-    }
-
-    public StackMine() {
-        capacity = 50;
-        containArray = (T[]) new Object[capacity];
-    }
-
-    public StackMine(int cap) {
-        capacity = cap;
-        try {
-            containArray = (T[]) new Object[cap];
-        } catch (OutOfMemoryError out) {
-            out.printStackTrace();
-        }
     }
 
     /**
@@ -35,9 +28,9 @@ public class StackMine<T> {
      * handles possible exceptions for the caller
      */
     public byte resize() {
-        capacity = (containArray.length) * 2;
+        int newSize = (containArray.length) * 2;
         try {
-            containArray = Arrays.copyOf(containArray, capacity);
+            containArray = Arrays.copyOf(containArray, newSize);
         } catch (OutOfMemoryError | NullPointerException out) {
             return 0;
         }
@@ -51,7 +44,7 @@ public class StackMine<T> {
      * @return - 1 or 0 depending on success
      */
     public byte push(T elem) {
-        if (size < capacity) {
+        if (size < containArray.length) {
             containArray[size] = elem;
         } else {
             byte success = resize();
@@ -74,7 +67,7 @@ public class StackMine<T> {
     public byte pushStack(T[] entry) {
         int success, entryLen;
         entryLen = entry.length;
-        if (entryLen + size <= capacity) {
+        if (entryLen + size <= containArray.length) {
             System.arraycopy(entry, 0, containArray, size, entryLen);
             size += entryLen;
         } else {
