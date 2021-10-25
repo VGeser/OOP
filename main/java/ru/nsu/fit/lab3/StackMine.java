@@ -1,8 +1,16 @@
 package ru.nsu.fit.lab3;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
-public class StackMine<T> {
+public class StackMine<T> implements Iterable {
+    public T[] getContainArray() {
+        return containArray;
+    }
+
     private T[] containArray;
     private static int size; //existing elements
 
@@ -110,4 +118,32 @@ public class StackMine<T> {
         return current;
     }
 
+    @Override
+    public Iterator iterator() {
+        return new smallIterator<>(this);
+    }
+}
+
+class smallIterator<T> implements Iterator {
+    private final T[] elems;
+    private int cursor;
+    private final int len;
+
+    public smallIterator(StackMine<T> tStackMine) {
+        cursor = 0;
+        elems = tStackMine.getContainArray();
+        len = tStackMine.size();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return cursor < len;
+    }
+
+    @Override
+    public Object next() {
+        T elem = elems[cursor];
+        cursor++;
+        return elem;
+    }
 }
