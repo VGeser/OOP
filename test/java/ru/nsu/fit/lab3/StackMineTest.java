@@ -6,17 +6,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StackMineTest {
+    //i had issues with gradle, therefore recommend running each test separately
     @Test
     @DisplayName("Test from requirements")
     public void reqTest() {
-        StackMine<Integer> stack = new StackMine<>();
+        StackMine<Integer> stack = new StackMine<>(5);
         stack.push(2);
         stack.push(7);
         stack.pushStack(new Integer[]{4, 8});
         int res = stack.pop();
         assertEquals(8, res);
         assertArrayEquals(new Integer[]{7, 4}, stack.popStack(2));
-        assertEquals(1,stack.size());
+        assertEquals(1, stack.size());
     }
 
     @Test
@@ -26,7 +27,7 @@ class StackMineTest {
         try {
             byteStackMine.pop();
             byteStackMine.popStack(7);
-        } catch (NullPointerException| ArrayIndexOutOfBoundsException e) {
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             return;
         }
         fail();
@@ -70,7 +71,7 @@ class StackMineTest {
     public void classTest() {
         Example ex1 = new Example();
         Example ex2 = new Example(5.216, 'A', new float[]{3.111f, 9.999f});
-        StackMine<Example> exampleStack = new StackMine<>();
+        StackMine<Example> exampleStack = new StackMine<>(5);
         exampleStack.push(ex1);
         exampleStack.push(ex2);
         assertEquals(ex2, exampleStack.pop());
