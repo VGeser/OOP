@@ -33,14 +33,14 @@ public class Subject {
     //there must be 8 elements because this array functions as a dictionary
     //semester ID - grade (4 years * 2 sem-s in each)
     public void setGrades(byte[] grades) throws IllegalArgumentException {
-        if(grades.length<8) {
+        if (grades.length < 9) {
             throw new IllegalArgumentException();
         }
         this.grades = grades;
     }
 
-    public void setGrade(byte semID,byte grade){
-        grades[semID]=grade;
+    public void setGrade(byte semID, byte grade) {
+        grades[semID] = grade;
     }
 
     public String getName() {

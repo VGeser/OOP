@@ -27,22 +27,23 @@ public class CreditBook {
         this.subjects = subjects;
     }
 
-    public void addSubject(Subject subject){
+    public void addSubject(Subject subject) {
         subjects.add(subject);
     }
 
     /**
      * initializes class filed for all grades
+     *
      * @return sum of all grades
      */
     private int setAllGrades() {
         allGrades = new ArrayList<>();
-        int res=0;
+        int res = 0;
         for (Subject sub : subjects) {
             byte[] grades = sub.getGrades();
             for (byte grade : grades) {
-                if(grade!=0){
-                    res+=grade;
+                if (grade != 0) {
+                    res += grade;
                     allGrades.add(grade);
                 }
             }
@@ -55,44 +56,46 @@ public class CreditBook {
      */
     public float averageGrade() {
         int sum = setAllGrades();
-        return (float) sum/(allGrades.size());
+        return (float) sum / (allGrades.size());
     }
 
     /**
      * checks if student can get an excellent diploma
+     *
      * @return true if yes
      */
     public boolean excellent() {
-        if(allGrades==null){
+        if (allGrades == null) {
             setAllGrades();
         }
-        int ref = Math.round(0.75f*(allGrades.size())*5);
-        int fives=0;
-        for (byte grade:allGrades) {
-            if(grade==3)return false;
-            if(grade==5)fives++;
+        int ref = Math.round(0.75f * (allGrades.size()));
+        int fives = 0;
+        for (byte grade : allGrades) {
+            if (grade == 3) return false;
+            if (grade == 5) fives++;
         }
         return (ref <= fives) && (qualification == 5);
     }
 
     /**
      * checks if student will get additional scholarship in semester
+     *
      * @param current semester ID
      * @return true if yes
      */
     public boolean highScholarship(byte current) {
         ArrayList<Byte> currentGrades = new ArrayList<>();
-        for (Subject sub:subjects) {
+        for (Subject sub : subjects) {
             byte[] sems = sub.getDuration();
             byte[] grades = sub.getGrades();
-            for (byte sem:sems) {
-                if(sem==current){
+            for (byte sem : sems) {
+                if (sem == current) {
                     currentGrades.add(grades[sem]);
                 }
             }
         }
-        for (byte grade:currentGrades) {
-            if(grade==3)return false;
+        for (byte grade : currentGrades) {
+            if (grade == 3) return false;
         }
         return true;
     }
