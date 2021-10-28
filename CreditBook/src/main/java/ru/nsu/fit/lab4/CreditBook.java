@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CreditBook {
     private ArrayList<Subject> subjects;
-    private final ArrayList<Byte> allGrades = new ArrayList<>();
+    private ArrayList<Byte> allGrades;
     private byte qualification;
 
     public CreditBook() {
@@ -31,7 +31,12 @@ public class CreditBook {
         subjects.add(subject);
     }
 
+    /**
+     * initializes class filed for all grades
+     * @return sum of all grades
+     */
     private int setAllGrades() {
+        allGrades = new ArrayList<>();
         int res=0;
         for (Subject sub : subjects) {
             byte[] grades = sub.getGrades();
@@ -45,12 +50,22 @@ public class CreditBook {
         return res;
     }
 
-    public double averageGrade() {
+    /**
+     * @return float average grade (not double to save space)
+     */
+    public float averageGrade() {
         int sum = setAllGrades();
-        return (double) sum/(allGrades.size());
+        return (float) sum/(allGrades.size());
     }
 
+    /**
+     * checks if student can get an excellent diploma
+     * @return true if yes
+     */
     public boolean excellent() {
+        if(allGrades==null){
+            setAllGrades();
+        }
         int ref = Math.round(0.75f*(allGrades.size())*5);
         int fives=0;
         for (byte grade:allGrades) {
@@ -60,6 +75,11 @@ public class CreditBook {
         return (ref <= fives) && (qualification == 5);
     }
 
+    /**
+     * checks if student will get additional scholarship in semester
+     * @param current semester ID
+     * @return true if yes
+     */
     public boolean highScholarship(byte current) {
         ArrayList<Byte> currentGrades = new ArrayList<>();
         for (Subject sub:subjects) {
