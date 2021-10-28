@@ -46,4 +46,5 @@ public class Subject {
     public String getName() {
         return name;
     }
+
 }
