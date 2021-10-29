@@ -14,10 +14,6 @@ public class StackMine<T> implements Iterable {
         }
     }
 
-    public T[] getContainArray() {
-        return containArray;
-    }
-
     /**
      * @return number of initialized elements in container
      */
@@ -118,28 +114,25 @@ public class StackMine<T> implements Iterable {
     public Iterator iterator() {
         return new SmallIterator<>(this);
     }
-}
+    class SmallIterator<T> implements Iterator {
+        private int cursor;
 
-class SmallIterator<T> implements Iterator {
-    private final T[] elems;
-    private int cursor;
-    private final int len;
+        public SmallIterator(StackMine<T> tStackMine) {
+            cursor = 0;
+        }
 
-    public SmallIterator(StackMine<T> tStackMine) {
-        cursor = 0;
-        elems = tStackMine.getContainArray();
-        len = tStackMine.size();
-    }
+        @Override
+        public boolean hasNext() {
+            return cursor < containArray.length;
+        }
 
-    @Override
-    public boolean hasNext() {
-        return cursor < len;
-    }
-
-    @Override
-    public Object next() {
-        T elem = elems[cursor];
-        cursor++;
-        return elem;
+        @Override
+        public Object next() {
+            T elem = (T) containArray[cursor];
+            cursor++;
+            return elem;
+        }
     }
 }
+
+
