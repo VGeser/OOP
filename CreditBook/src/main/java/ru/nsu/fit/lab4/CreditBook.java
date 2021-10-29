@@ -95,7 +95,7 @@ public class CreditBook {
             }
         }
         for (byte grade : currentGrades) {
-            if (grade == 3) return false;
+            if (grade != 5) return false;
         }
         return true;
     }
