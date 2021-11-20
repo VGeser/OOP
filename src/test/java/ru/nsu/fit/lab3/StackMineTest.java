@@ -9,7 +9,7 @@ class StackMineTest {
     //i had issues with gradle, therefore recommend running each test separately
     @Test
     @DisplayName("Test from requirements")
-    public void reqTest() {
+    public void reqTest() throws InvalidQueryException {
         StackMine<Integer> stack = new StackMine<>(5);
         stack.push(2);
         stack.push(7);
@@ -24,7 +24,7 @@ class StackMineTest {
     @DisplayName("Empty container test")
     public void nullTest() {
         StackMine<Byte> byteStackMine = new StackMine<>(0);
-        assertThrows(ArrayIndexOutOfBoundsException.class , () -> {
+        assertThrows(InvalidQueryException.class , () -> {
             byteStackMine.pop();
             byteStackMine.popStack(7);
         });
@@ -32,7 +32,7 @@ class StackMineTest {
 
     @Test
     @DisplayName("String test")
-    public void strTest() {
+    public void strTest() throws InvalidQueryException {
         StackMine<String> stackMine = new StackMine<>(3);
         stackMine.push("Honeymoon");
         stackMine.pushStack(new String[]{"is", "the"});
@@ -65,7 +65,7 @@ class StackMineTest {
 
     @Test
     @DisplayName("Complicated class test")
-    public void classTest() {
+    public void classTest() throws InvalidQueryException {
         Example ex1 = new Example();
         Example ex2 = new Example(5.216, 'A', new float[]{3.111f, 9.999f});
         StackMine<Example> exampleStack = new StackMine<>(5);
