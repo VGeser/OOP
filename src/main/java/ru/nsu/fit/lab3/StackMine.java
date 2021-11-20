@@ -84,11 +84,16 @@ public class StackMine<T> implements Iterable {
      * @return - first stack element (last in container)
      * @throws NullPointerException - if an array is empty
      */
-    public T pop() throws ArrayIndexOutOfBoundsException {
-        T elem = containArray[size - 1];
-        containArray[size - 1] = null;
-        size--;
-        return elem;
+    public T pop() throws InvalidQueryException {
+        try{
+            T elem = containArray[size - 1];
+            containArray[size - 1] = null;
+            size--;
+            return elem;
+        }catch(ArrayIndexOutOfBoundsException ex){
+            throw new InvalidQueryException("Incorrect request");
+        }
+
     }
 
     /**
@@ -98,14 +103,19 @@ public class StackMine<T> implements Iterable {
      * @return - a stack-like array
      * @throws NullPointerException - if a container is empty
      */
-    public T[] popStack(int num) throws ArrayIndexOutOfBoundsException {
+    public T[] popStack(int num)throws InvalidQueryException{
         T[] current = (T[]) new Object[num];
         int j = num;
-        for (int i = 1; i <= num; i++) {
-            current[j - 1] = containArray[size - i];
-            containArray[size - i] = null;
-            j--;
+        try{
+            for (int i = 1; i <= num; i++) {
+                current[j - 1] = containArray[size - i];
+                containArray[size - i] = null;
+                j--;
+            }
+        }catch(ArrayIndexOutOfBoundsException ex){
+            throw new InvalidQueryException("Incorrect request");
         }
+
         size -= num;
         return current;
     }
@@ -134,5 +144,11 @@ public class StackMine<T> implements Iterable {
         }
     }
 }
+class InvalidQueryException  extends Exception {
+    public InvalidQueryException (String str) {
+        super(str);
+    }
+}
+
 
 
