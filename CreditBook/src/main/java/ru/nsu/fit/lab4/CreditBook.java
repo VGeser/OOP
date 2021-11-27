@@ -6,6 +6,8 @@ public class CreditBook {
     private ArrayList<Subject> subjects;
     private ArrayList<Byte> allGrades;
     private byte qualification;
+    private float average;
+    private int sumGrades, counted;
 
     public CreditBook() {
         subjects = new ArrayList<>();
@@ -32,31 +34,52 @@ public class CreditBook {
     }
 
     /**
-     * initializes class filed for all grades
+     * adds grades to the list
      *
-     * @return sum of all grades
+     * @param start - from which position to add grades
      */
-    private int setAllGrades() {
-        allGrades = new ArrayList<>();
-        int res = 0;
-        for (Subject sub : subjects) {
-            byte[] grades = sub.getGrades();
-            for (byte grade : grades) {
+    private void addGrades(int start) {
+        if (start == 0) allGrades = new ArrayList<>();
+        for (int i = start; i < subjects.size(); i++) {
+            for (byte grade : (subjects.get(i)).getGrades()) {
                 if (grade != 0) {
-                    res += grade;
                     allGrades.add(grade);
                 }
             }
         }
-        return res;
     }
 
     /**
-     * @return float average grade (not double to save space)
+     * counts sum of a certain amount of grades
+     *
+     * @param begin - index from which grade to start
+     */
+    private void setSumGrades(int begin) {
+        for (int i = begin; i < allGrades.size(); i++) {
+            sumGrades += (allGrades.get(i));
+        }
+    }
+
+    /**
+     * @return float average grade (no need for double precision)
      */
     public float averageGrade() {
-        int sum = setAllGrades();
-        return (float) sum / (allGrades.size());
+        int tmpSize = subjects.size();
+        if (allGrades == null) {
+            this.addGrades(0);
+            sumGrades = 0;
+            setSumGrades(0);
+            counted = tmpSize;
+        } else {
+            if (counted == tmpSize) {
+                return average;
+            } else {
+                addGrades(counted);
+                setSumGrades(counted);
+            }
+        }
+        average = (float) sumGrades / (allGrades.size());
+        return average;
     }
 
     /**
@@ -66,7 +89,7 @@ public class CreditBook {
      */
     public boolean excellent() {
         if (allGrades == null) {
-            setAllGrades();
+            addGrades(0);
         }
         int ref = Math.round(0.75f * (allGrades.size()));
         int fives = 0;
