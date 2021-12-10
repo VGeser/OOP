@@ -3,13 +3,13 @@ package ru.nsu.fit.lab5;
 import java.util.Stack;
 
 public class Calculator {
-    private static Stack<String> stackStr = new Stack<>();
+    private Stack<String> stackStr = new Stack<>();
 
     /**
      * creates stack of tokens from given expression
      * @param in - given expression
      */
-    private static void makeStack(String in) {
+    private void makeStack(String in) {
         if (in == null) {
             throw new IllegalArgumentException("Expression must be non-empty");
         }
@@ -26,7 +26,7 @@ public class Calculator {
      * @param token - token being checked
      * @return - true if token is number
      */
-    private static boolean isNum(String token) {
+    private boolean isNum(String token) {
         if (token == null) return false;
         try {
             Double.parseDouble(token);
@@ -41,7 +41,7 @@ public class Calculator {
      * @param token - current token
      * @return - calculated current branch result
      */
-    static double getDouble(String token) {
+    private double getDouble(String token) {
         if (isNum(token)) {
             return Double.parseDouble(token);
         }
@@ -54,7 +54,7 @@ public class Calculator {
      * @param name - given token
      * @return - instance of operation implementing class
      */
-    public static Operation getOperation(String name) {
+    public Operation getOperation(String name) {
         return switch (name) {
             case ("+") -> new Operation.Sum();
             case ("-") -> new Operation.Sub();
@@ -74,7 +74,7 @@ public class Calculator {
      * @param in - given expression
      * @return - calculated double
      */
-    static double calculate(String in) {
+    public double calculate(String in) {
         makeStack(in);
         String token = stackStr.pop();
         Operation operation = getOperation(token);

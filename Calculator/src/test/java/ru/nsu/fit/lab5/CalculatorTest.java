@@ -29,8 +29,9 @@ class CalculatorTest {
     @ParameterizedTest
     @MethodSource("argumentProvider")
     void compare(String expression, double expect) {
+        Calculator calculator = new Calculator();
         double epsilon = 0.00001d;
-        double res = Calculator.calculate(expression);
+        double res = calculator.calculate(expression);
         assertEquals(expect, res, epsilon);
     }
 
@@ -44,7 +45,8 @@ class CalculatorTest {
     @ParameterizedTest
     @MethodSource("errorProvider")
     void errorTest(String expression){
+        Calculator calculator = new Calculator();
         assertThrows(IllegalArgumentException.class,
-                () -> Calculator.calculate(expression));
+                () -> calculator.calculate(expression));
     }
 }
