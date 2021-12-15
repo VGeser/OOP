@@ -2,88 +2,161 @@ package ru.nsu.fit.lab5;
 
 import java.util.Stack;
 
-interface Operation {
-    double calculate(Stack<String> stackStr);
+abstract class Operation {
+    int argsNum;
 
-    class Sum implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            token = tokens.pop();
-            double d2 = Calculator.getDouble(token);
-            return d1 + d2;
-        }
+    abstract double calculate(Stack<Double> args);
+
+    public static OperationFactory builder() {
+        return null;
+    }
+}
+
+class Sum extends Operation {
+    Sum() {
+        this.argsNum = 2;
     }
 
-    class Sub implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            token = tokens.pop();
-            double d2 = Calculator.getDouble(token);
-            return d1 - d2;
-        }
+    public static OperationFactory builder() {
+        return Sum::new;
     }
 
-    class Mult implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            token = tokens.pop();
-            double d2 = Calculator.getDouble(token);
-            return d1 * d2;
-        }
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        double arg2 = args.pop();
+        return arg1 + arg2;
+    }
+}
+
+class Sub extends Operation {
+    Sub() {
+        this.argsNum = 2;
     }
 
-    class Div implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            token = tokens.pop();
-            double d2 = Calculator.getDouble(token);
-            return d1 / d2;
-        }
+    public static OperationFactory builder() {
+        return Sub::new;
     }
 
-    class Log implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            return Math.log(d1);
-        }
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        double arg2 = args.pop();
+        return arg2 - arg1;
+    }
+}
+
+class Mult extends Operation {
+    Mult() {
+        this.argsNum = 2;
     }
 
-    class Pow implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            token = tokens.pop();
-            double d2 = Calculator.getDouble(token);
-            return Math.pow(d1, d2);
-        }
+    public static OperationFactory builder() {
+        return Mult::new;
     }
 
-    class Sqrt implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            return Math.sqrt(d1);
-        }
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        double arg2 = args.pop();
+        return arg1 * arg2;
+    }
+}
+
+class Div extends Operation {
+    Div() {
+        this.argsNum = 2;
     }
 
-    class Sin implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            return Math.sin(d1);
-        }
+    public static OperationFactory builder() {
+        return Div::new;
     }
 
-    class Cos implements Operation {
-        public double calculate(Stack<String> tokens) {
-            String token = tokens.pop();
-            double d1 = Calculator.getDouble(token);
-            return Math.cos(d1);
-        }
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        double arg2 = args.pop();
+        return arg2 / arg1;
+    }
+}
+
+class Sqrt extends Operation {
+    Sqrt() {
+        this.argsNum = 1;
+    }
+
+    public static OperationFactory builder() {
+        return Sqrt::new;
+    }
+
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        return Math.sqrt(arg1);
+    }
+}
+
+class Log extends Operation {
+    Log() {
+        this.argsNum = 1;
+    }
+
+    public static OperationFactory builder() {
+        return Log::new;
+    }
+
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        return Math.log(arg1);
+    }
+}
+
+class Pow extends Operation {
+    Pow() {
+        this.argsNum = 2;
+    }
+
+    public static OperationFactory builder() {
+        return Pow::new;
+    }
+
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        double arg2 = args.pop();
+        return Math.pow(arg2, arg1);
+    }
+}
+
+class Sin extends Operation {
+    Sin() {
+        this.argsNum = 1;
+    }
+
+    public static OperationFactory builder() {
+        return Sin::new;
+    }
+
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        return Math.sin(arg1);
+    }
+}
+
+class Cos extends Operation {
+    Cos() {
+        this.argsNum = 1;
+    }
+
+    public static OperationFactory builder() {
+        return Cos::new;
+    }
+
+    @Override
+    double calculate(Stack<Double> args) {
+        double arg1 = args.pop();
+        return Math.cos(arg1);
     }
 }

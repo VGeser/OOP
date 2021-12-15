@@ -1,6 +1,5 @@
 package ru.nsu.fit.lab5;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -9,7 +8,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CalculatorTest {
     public static Stream<Arguments> argumentProvider() {
@@ -44,9 +44,19 @@ class CalculatorTest {
 
     @ParameterizedTest
     @MethodSource("errorProvider")
-    void errorTest(String expression){
+    void errorTest(String expression) {
         Calculator calculator = new Calculator();
         assertThrows(IllegalArgumentException.class,
                 () -> calculator.calculate(expression));
+    }
+
+    @Test
+    void addingOperationTest() {
+        Calculator calculator = new Calculator();
+        calculator.addOperation("tan", Tan.builder());
+        String expression = "tan + 477 341";
+        double epsilon = 0.00001d;
+        double res = calculator.calculate(expression);
+        assertEquals(2.468589582, res, epsilon);
     }
 }

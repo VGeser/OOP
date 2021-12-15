@@ -1,12 +1,46 @@
 package ru.nsu.fit.lab5;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 public class Calculator {
+
     private Stack<String> stackStr = new Stack<>();
+    private Map<String, OperationFactory> operations;
+
+    //default constructor
+    public Calculator() {
+        operations = new HashMap<>();
+        operations.put("+", Sum.builder());
+        operations.put("-", Sub.builder());
+        operations.put("*", Mult.builder());
+        operations.put("/", Div.builder());
+        operations.put("sqrt", Sqrt.builder());
+        operations.put("log", Log.builder());
+        operations.put("pow", Pow.builder());
+        operations.put("sin", Sin.builder());
+        operations.put("cos", Cos.builder());
+    }
+
+    //allows using your own set of operations
+    public Calculator(Map<String, OperationFactory> operations) {
+        this.operations = operations;
+    }
+
+    /**
+     * method for adding operations
+     *
+     * @param name      - symbol of operation
+     * @param operation - instance of interface to construct operation
+     */
+    public void addOperation(String name, OperationFactory operation) {
+        operations.put(name, operation);
+    }
 
     /**
      * creates stack of tokens from given expression
+     *
      * @param in - given expression
      */
     private void makeStack(String in) {
@@ -21,63 +55,40 @@ public class Calculator {
     }
 
     /**
-     * method for better exception handling
-     * checks if token can be made double
-     * @param token - token being checked
-     * @return - true if token is number
-     */
-    private boolean isNum(String token) {
-        if (token == null) return false;
-        try {
-            Double.parseDouble(token);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    /**
      * calculates temporary result and calls further calculations
-     * @param token - current token
-     * @return - calculated current branch result
+     * needs no arguments because is based on global state of stack
+     *
+     * @return current branch result
      */
-    private double getDouble(String token) {
-        if (isNum(token)) {
+    public double parse() {
+        Stack<Double> currentArgs = new Stack<>();
+        String token = stackStr.pop();
+        try {
             return Double.parseDouble(token);
+        } catch (NumberFormatException exception) {
+            if (!operations.containsKey(token)) {
+                throw new IllegalArgumentException("Unknown operation");
+            }
+            OperationFactory currentInterface = operations.get(token);
+            Operation current = currentInterface.utility();
+            int num = current.argsNum;
+            for (int i = 0; i < num; i++) {
+                double next = parse();
+                currentArgs.push(next);
+            }
+            return current.calculate(currentArgs);
         }
-        Operation operation = getOperation(token);
-        return operation.calculate(stackStr);
-    }
-
-    /**
-     * method that defines operation from token
-     * @param name - given token
-     * @return - instance of operation implementing class
-     */
-    public Operation getOperation(String name) {
-        return switch (name) {
-            case ("+") -> new Operation.Sum();
-            case ("-") -> new Operation.Sub();
-            case ("*") -> new Operation.Mult();
-            case ("/") -> new Operation.Div();
-            case ("sin") -> new Operation.Sin();
-            case ("cos") -> new Operation.Cos();
-            case ("sqrt") -> new Operation.Sqrt();
-            case ("log") -> new Operation.Log();
-            case ("pow") -> new Operation.Pow();
-            default -> throw new IllegalArgumentException("Unknown operation");
-        };
     }
 
     /**
      * calculates result recursively
+     *
      * @param in - given expression
      * @return - calculated double
      */
     public double calculate(String in) {
         makeStack(in);
-        String token = stackStr.pop();
-        Operation operation = getOperation(token);
-        return operation.calculate(stackStr);
+        return parse();
     }
 }
+
