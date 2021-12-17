@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class Tan extends Operation {
     Tan() {
-        this.argsNum = 1;
+        super(1);
     }
 
     public static OperationFactory builder() {
