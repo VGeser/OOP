@@ -5,7 +5,7 @@ import java.util.Stack;
 abstract class Operation {
     int argsNum;
 
-    Operation(int argv){
+    Operation(int argv) {
         this.argsNum = argv;
     }
 
@@ -16,10 +16,31 @@ abstract class Operation {
     }
 }
 
-class Sum extends Operation {
-    Sum(){
+abstract class NullOperation extends Operation {
+    NullOperation() {
+        super(0);
+    }
+}
+
+abstract class UnaryOperation extends Operation {
+    UnaryOperation() {
+        super(1);
+    }
+}
+
+abstract class BinaryOperation extends Operation {
+    BinaryOperation() {
         super(2);
     }
+}
+
+abstract class TernaryOperation extends Operation {
+    TernaryOperation() {
+        super(3);
+    }
+}
+
+class Sum extends BinaryOperation {
 
     public static OperationFactory builder() {
         return Sum::new;
@@ -33,10 +54,7 @@ class Sum extends Operation {
     }
 }
 
-class Sub extends Operation {
-    Sub() {
-        super(2);
-    }
+class Sub extends BinaryOperation {
 
     public static OperationFactory builder() {
         return Sub::new;
@@ -50,10 +68,7 @@ class Sub extends Operation {
     }
 }
 
-class Mult extends Operation {
-    Mult() {
-        super(2);
-    }
+class Mult extends BinaryOperation {
 
     public static OperationFactory builder() {
         return Mult::new;
@@ -67,10 +82,7 @@ class Mult extends Operation {
     }
 }
 
-class Div extends Operation {
-    Div() {
-        super(2);
-    }
+class Div extends BinaryOperation {
 
     public static OperationFactory builder() {
         return Div::new;
@@ -84,10 +96,7 @@ class Div extends Operation {
     }
 }
 
-class Sqrt extends Operation {
-    Sqrt() {
-        super(1);
-    }
+class Sqrt extends UnaryOperation {
 
     public static OperationFactory builder() {
         return Sqrt::new;
@@ -100,10 +109,7 @@ class Sqrt extends Operation {
     }
 }
 
-class Log extends Operation {
-    Log() {
-        super(1);
-    }
+class Log extends UnaryOperation {
 
     public static OperationFactory builder() {
         return Log::new;
@@ -116,10 +122,7 @@ class Log extends Operation {
     }
 }
 
-class Pow extends Operation {
-    Pow() {
-        super(2);
-    }
+class Pow extends BinaryOperation {
 
     public static OperationFactory builder() {
         return Pow::new;
@@ -133,10 +136,7 @@ class Pow extends Operation {
     }
 }
 
-class Sin extends Operation {
-    Sin() {
-        super(1);
-    }
+class Sin extends UnaryOperation {
 
     public static OperationFactory builder() {
         return Sin::new;
@@ -149,10 +149,7 @@ class Sin extends Operation {
     }
 }
 
-class Cos extends Operation {
-    Cos() {
-        super(1);
-    }
+class Cos extends UnaryOperation {
 
     public static OperationFactory builder() {
         return Cos::new;
