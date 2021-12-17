@@ -5,6 +5,10 @@ import java.util.Stack;
 abstract class Operation {
     int argsNum;
 
+    Operation(int argv){
+        this.argsNum = argv;
+    }
+
     abstract double calculate(Stack<Double> args);
 
     public static OperationFactory builder() {
@@ -13,8 +17,8 @@ abstract class Operation {
 }
 
 class Sum extends Operation {
-    Sum() {
-        this.argsNum = 2;
+    Sum(){
+        super(2);
     }
 
     public static OperationFactory builder() {
@@ -31,7 +35,7 @@ class Sum extends Operation {
 
 class Sub extends Operation {
     Sub() {
-        this.argsNum = 2;
+        super(2);
     }
 
     public static OperationFactory builder() {
@@ -48,7 +52,7 @@ class Sub extends Operation {
 
 class Mult extends Operation {
     Mult() {
-        this.argsNum = 2;
+        super(2);
     }
 
     public static OperationFactory builder() {
@@ -65,7 +69,7 @@ class Mult extends Operation {
 
 class Div extends Operation {
     Div() {
-        this.argsNum = 2;
+        super(2);
     }
 
     public static OperationFactory builder() {
@@ -82,7 +86,7 @@ class Div extends Operation {
 
 class Sqrt extends Operation {
     Sqrt() {
-        this.argsNum = 1;
+        super(1);
     }
 
     public static OperationFactory builder() {
@@ -98,7 +102,7 @@ class Sqrt extends Operation {
 
 class Log extends Operation {
     Log() {
-        this.argsNum = 1;
+        super(1);
     }
 
     public static OperationFactory builder() {
@@ -114,7 +118,7 @@ class Log extends Operation {
 
 class Pow extends Operation {
     Pow() {
-        this.argsNum = 2;
+        super(2);
     }
 
     public static OperationFactory builder() {
@@ -131,7 +135,7 @@ class Pow extends Operation {
 
 class Sin extends Operation {
     Sin() {
-        this.argsNum = 1;
+        super(1);
     }
 
     public static OperationFactory builder() {
@@ -147,7 +151,7 @@ class Sin extends Operation {
 
 class Cos extends Operation {
     Cos() {
-        this.argsNum = 1;
+        super(1);
     }
 
     public static OperationFactory builder() {

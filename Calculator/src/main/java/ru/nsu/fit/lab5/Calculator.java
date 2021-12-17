@@ -9,7 +9,9 @@ public class Calculator {
     private Stack<String> stackStr = new Stack<>();
     private Map<String, OperationFactory> operations;
 
-    //default constructor
+    /**
+     * default constructor, adds basic operations
+     */
     public Calculator() {
         operations = new HashMap<>();
         operations.put("+", Sum.builder());
@@ -23,7 +25,10 @@ public class Calculator {
         operations.put("cos", Cos.builder());
     }
 
-    //allows using your own set of operations
+    /**
+     * parametrized constructor allows using your own set of operations
+     * @param operations - your set
+     */
     public Calculator(Map<String, OperationFactory> operations) {
         this.operations = operations;
     }
@@ -70,7 +75,7 @@ public class Calculator {
                 throw new IllegalArgumentException("Unknown operation");
             }
             OperationFactory currentInterface = operations.get(token);
-            Operation current = currentInterface.utility();
+            Operation current = currentInterface.make();
             int num = current.argsNum;
             for (int i = 0; i < num; i++) {
                 double next = parse();
