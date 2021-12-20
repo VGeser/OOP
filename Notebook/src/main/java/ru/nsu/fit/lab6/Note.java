@@ -15,7 +15,7 @@ public class Note {
     }
 
     /**
-     *there are no setters because no editing is required
+     * there are no setters because no editing is required
      */
 
     public String getTimestamp() {
