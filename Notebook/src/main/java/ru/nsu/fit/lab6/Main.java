@@ -48,7 +48,7 @@ public class Main {
                         System.arraycopy(args, 3, keywords, 0, len - 3);
                         out = notebook.show(args[1], args[2], keywords);
                     }
-                    for (String str:out) {
+                    for (String str : out) {
                         System.out.println(str);
                     }
                 default:
