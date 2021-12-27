@@ -9,7 +9,7 @@ public class Main {
      * closing a program with warning
      * does not throw an exception, because it is rather a misunderstanding
      */
-    public static void closer() {
+    public static void close() {
         System.out.println("Usage: notebook -command <args>");
         exit(-1);
     }
@@ -17,14 +17,14 @@ public class Main {
     public static void main(String[] args) {
         int len = args.length;
         if (len == 0) {
-            closer();
+            close();
         } else {
             String command = args[0];
             Notebook notebook = new Notebook();
             switch (command) {
                 case "-add":
                     if (len == 1) {
-                        closer();
+                        close();
                     } else {
                         String[] notes = new String[len - 1];
                         System.arraycopy(args, 1, notes, 0, len - 1);
@@ -32,7 +32,7 @@ public class Main {
                     }
                 case "-rm":
                     if (len == 1) {
-                        closer();
+                        close();
                     } else {
                         String[] notes = new String[len - 1];
                         System.arraycopy(args, 1, notes, 0, len - 1);
