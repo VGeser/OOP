@@ -10,11 +10,34 @@ import java.util.ArrayList;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
 public class Notebook {
-    private final File file = new File("notes.json");
+    private final File file;
     private final DateTimeFormatter dateTimeFormatter;
     private final Gson gson;
 
+    /**
+     * default constructor
+     */
     public Notebook() {
+        file = new File("notes.json");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+                System.out.println("Can't create a file for your notes");
+            }
+        }
+        dateTimeFormatter = ISO_LOCAL_DATE_TIME;
+        gson = new Gson();
+    }
+
+    /**
+     * creating an instance with a specified file
+     *
+     * @param filename - your file for a notebook
+     */
+    public Notebook(String filename) {
+        file = new File(filename);
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -130,12 +153,12 @@ public class Notebook {
      * show only certain notes
      * this method relies on optimization of default 'contains' function
      *
-     * @param time1    - notes older than this time
-     * @param time2    - notes younger than this time
+     * @param timeFrom - notes older than this time
+     * @param timeTo   - notes younger than this time
      * @param keywords - notes containing these substrings
      * @return - list of notes' contents
      */
-    public ArrayList<String> show(String time1, String time2, String[] keywords) {
+    public ArrayList<String> show(String timeFrom, String timeTo, String[] keywords) {
         ArrayList<String> texts;
         ArrayList<String> out = new ArrayList<>();
         try {
@@ -143,8 +166,8 @@ public class Notebook {
             BufferedReader bufReader = new BufferedReader(reader);
             String line;
             LocalDateTime time;
-            LocalDateTime before = LocalDateTime.parse(time1, dateTimeFormatter);
-            LocalDateTime after = LocalDateTime.parse(time2, dateTimeFormatter);
+            LocalDateTime before = LocalDateTime.parse(timeFrom, dateTimeFormatter);
+            LocalDateTime after = LocalDateTime.parse(timeTo, dateTimeFormatter);
             texts = new ArrayList<>();
             while ((line = bufReader.readLine()) != null) {
                 Note note = gson.fromJson(line, Note.class);
