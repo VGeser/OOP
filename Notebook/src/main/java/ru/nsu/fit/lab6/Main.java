@@ -19,23 +19,36 @@ public class Main {
         if (len == 0) {
             close();
         } else {
+            int from;
             String command = args[0];
-            Notebook notebook = new Notebook();
+            Notebook notebook;
+            if(command.equals("-name")){
+                if(len<=2){
+                    close();
+                }
+                String name = args[1];
+                command=args[2];
+                notebook = new Notebook(name);
+                from=2;
+            }else{
+                notebook = new Notebook();
+                from=0;
+            }
             switch (command) {
                 case "-add":
                     if (len == 1) {
                         close();
                     } else {
-                        String[] notes = new String[len - 1];
-                        System.arraycopy(args, 1, notes, 0, len - 1);
+                        String[] notes = new String[len - (from+1)];
+                        System.arraycopy(args, from+1, notes, 0, len - (from+1));
                         notebook.add(notes);
                     }
                 case "-rm":
                     if (len == 1) {
                         close();
                     } else {
-                        String[] notes = new String[len - 1];
-                        System.arraycopy(args, 1, notes, 0, len - 1);
+                        String[] notes = new String[len - (from+1)];
+                        System.arraycopy(args, from+1, notes, 0, len - (from+1));
                         notebook.remove(notes);
                     }
                 case "-show":
@@ -44,9 +57,9 @@ public class Main {
                         out = notebook.show();
 
                     } else {
-                        String[] keywords = new String[len - 3];
-                        System.arraycopy(args, 3, keywords, 0, len - 3);
-                        out = notebook.show(args[1], args[2], keywords);
+                        String[] keywords = new String[len - (from+3)];
+                        System.arraycopy(args, from+3, keywords, 0, len - (from+3));
+                        out = notebook.show(args[from+1], args[from+2], keywords);
                     }
                     for (String str : out) {
                         System.out.println(str);
