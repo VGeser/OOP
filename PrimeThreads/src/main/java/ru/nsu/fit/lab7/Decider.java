@@ -29,17 +29,17 @@ public class Decider {
         return instance;
     }
 
-    public boolean isPrime(int num) {
+    public boolean isNotPrime(int num) {
         if (num <= ceiling) {
-            return cashed[num];
+            return !cashed[num];
         } else {
             int border = (int) Math.round(Math.sqrt(num)) + 1;
             for (int i = 2; i < border; i++) {
                 if (cashed[i] && num % i == 0) {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
     }
 }
