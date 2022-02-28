@@ -1,15 +1,15 @@
 package ru.nsu.fit.lab7;
 
 import java.util.Arrays;
-import java.util.Random;
+import java.util.Collections;
 
 public class WithThreads {
     private int[] arr;
     private boolean[] takenNumbers;
     private int len;
-    private final Random rand = new Random();
     private boolean locked = false;
     private boolean done = false;
+    private boolean res = false;
     private final Decider decider = Decider.getInstance();
 
     class Running extends Thread {
@@ -31,13 +31,15 @@ public class WithThreads {
                     int curIndex = getCurrent();
                     if (curIndex == -1) {
                         done = true;
-                        locked = false;
                         notify();
                     } else {
                         takenNumbers[curIndex] = true;
                         if (decider.isNotPrime(arr[curIndex])) {
+                            res = true;
+                            done = true;
                             throw new RuntimeException();
                         } else {
+                            locked=false;
                             notify();
                         }
                     }
@@ -46,20 +48,10 @@ public class WithThreads {
         }
     }
 
-    private static void swap(int[] arr, int i, int j) {
-        arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
-    }
-
-    private void shuffle(int r, int[] arr) {
-        for (int i = 0; i < r; ++i) {
-            int k = (rand.nextInt()) % (i + 1);
-            swap(arr, k, i);
-        }
-    }
 
     public void setArr(int[] arr) {
         len = arr.length;
-        shuffle(len, arr);
+        Collections.shuffle(Arrays.asList(arr));
         this.arr = arr;
     }
 
@@ -76,7 +68,7 @@ public class WithThreads {
         return -1;
     }
 
-    public boolean threadPrime(int threadsNum, int[] arr) {
+    public boolean threadPrime(int threadsNum) {
         takenNumbers = new boolean[len];
         Arrays.fill(takenNumbers, false);
         Running[] threads = new Running[threadsNum];
@@ -88,13 +80,22 @@ public class WithThreads {
             for (Running t : threads) {
                 t.interrupt();
             }
+
         };
         for (Running t : threads) {
             t.setUncaughtExceptionHandler(handler);
         }
-        for (Running t : threads) {
-            t.start();
+        byte j=1;
+        for (int i = 0; i < threadsNum; i+=2) {
+            threads[i].start();
+            try {
+                threads[j].sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            threads[j].start();
+            j+=2;
         }
-        return false;
+        return res;
     }
 }

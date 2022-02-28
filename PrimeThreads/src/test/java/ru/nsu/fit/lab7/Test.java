@@ -5,8 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -22,7 +20,8 @@ class Test {
                         6998009, 6998029, 6998039, 6998051, 6998053}, false),
 
                 Arguments.of(ar1, true),
-                Arguments.of(new int[]{102217, 102229, 102233, 102241, 102251, 10000001,
+                Arguments.of(new int[]{103549, 3, Integer.MAX_VALUE, 3, 10000019},false),
+                Arguments.of(new int[]{102217, 102229, 102233, 102241, 102251, 10000019,
                         102259, 102293, 102299, 102301, 102317, 102329, 102337, 102359,
                         102367, 102397, 102407, 102409, 102433, 102437, 102451, 102461,
                         102481, 102497, 102499, 102503, 102523, 102533, 102539, 102547,
@@ -48,7 +47,7 @@ class Test {
                         104459, 104471, 104473, 104479, 104491, 104513, 104527, 104537,
                         104543, 104549, 104551, 104561, 104579, 104593, 104597, 104623,
                         104639, 104651, 104659, 104677, 104681, 104683, 104693, 104701,
-                        103651, 103657, 103669, 103681, 10000001, 104711, 104717, 104729}, false),
+                        103651, 103657, 103669, 103681, 104711, 104717, 104729}, true),
                 Arguments.of(new int[]{0}, true),
                 Arguments.of(new int[]{}, false)
         );
@@ -57,24 +56,24 @@ class Test {
     @ParameterizedTest
     @MethodSource("argumentProvider")
     void testSequent(int[] inArr, boolean res) {
-        Instant inst1 = Instant.now();
+        long start1 = System.nanoTime();
         Sequential sequential = new Sequential();
         boolean answ = sequential.sequentPrime(inArr);
-        Instant inst2 = Instant.now();
-        System.out.println("Sequential time: " + Duration.between(inst1, inst2).toString() + "\n");
+        long end1 = System.nanoTime();
+        System.out.println("Sequential time: " + (end1-start1) + "\n");
         Assert.assertEquals(answ, res);
     }
 
     @ParameterizedTest
     @MethodSource("argumentProvider")
     void testWithThreads(int[] inArr, boolean res) {
-        byte[] quantity = {2, 6, 4, 8};
+        byte[] quantity = {2, 4, 6, 8};
         for (byte num : quantity) {
-            Instant inst1 = Instant.now();
+            long start1 = System.nanoTime();
             WithThreads concurrent = new WithThreads(inArr);
-            boolean answ = concurrent.threadPrime(num, inArr);
-            Instant inst2 = Instant.now();
-            System.out.println(num + " threads time: " + Duration.between(inst1, inst2).toString() + "\n");
+            boolean answ = concurrent.threadPrime(num);
+            long end1 = System.nanoTime();
+            System.out.println(num + " Threads time: " + (end1-start1) + "\n");
             Assert.assertEquals(answ, res);
         }
     }
@@ -82,11 +81,11 @@ class Test {
     @ParameterizedTest
     @MethodSource("argumentProvider")
     void testAPI(int[] inArr, boolean res) {
-        Instant inst1 = Instant.now();
+        long start1 = System.nanoTime();
         WithAPI parallel = new WithAPI();
         boolean answ = parallel.apiPrime(inArr);
-        Instant inst2 = Instant.now();
-        System.out.println("Parallel Stream time: " + Duration.between(inst1, inst2).toString() + "\n");
+        long end1 = System.nanoTime();
+        System.out.println("Parallel Stream time: " + (end1-start1) + "\n");
         Assert.assertEquals(answ, res);
     }
 
