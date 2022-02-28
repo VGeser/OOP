@@ -3,66 +3,98 @@ package ru.nsu.fit.lab7;
 import java.util.Arrays;
 import java.util.Random;
 
-public class WithThreads extends Thread {
+public class WithThreads {
     private int[] arr;
     private boolean[] takenNumbers;
     private int len;
-    Random rand = new Random();
-    private boolean semaphore = false;
+    private final Random rand = new Random();
+    private boolean locked = false;
+    private boolean done = false;
+    private final Decider decider = Decider.getInstance();
 
+    class Running extends Thread {
+        public Running(String s) {
+            super(s);
+        }
+
+        @Override
+        public synchronized void run() {
+            while (!done && !Thread.interrupted()) {
+                if (locked) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    locked = true;
+                    int curIndex = getCurrent();
+                    if (curIndex == -1) {
+                        done = true;
+                        locked = false;
+                        notify();
+                    } else {
+                        takenNumbers[curIndex] = true;
+                        if (decider.isNotPrime(arr[curIndex])) {
+                            throw new RuntimeException();
+                        } else {
+                            notify();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
+    }
+
+    private void shuffle(int r, int[] arr) {
+        for (int i = 0; i < r; ++i) {
+            int k = (rand.nextInt()) % (i + 1);
+            swap(arr, k, i);
+        }
+    }
 
     public void setArr(int[] arr) {
-        this.arr = arr;
         len = arr.length;
+        shuffle(len, arr);
+        this.arr = arr;
     }
 
     public WithThreads(int[] arr) {
-        this.arr = arr;
-        len = arr.length;
+        setArr(arr);
     }
 
-    private int getCurrent(){
-        int curIndex = rand.nextInt(len);
-
-        //if already taken, proceed to the first not taken
-        while (takenNumbers[curIndex]) {
-            curIndex = rand.nextInt(len);
-        }
-        return curIndex;
-    }
-
-    class Shared {
-        private void setTakenNumbers(int index){
-            takenNumbers[index] = true;
-        }
-        private void setSemaphore(){
-            semaphore = true;
-        }
-    }
-    final Shared shared = new Shared();
-
-    public void run() {
-        Decider decider = Decider.getInstance();
-        int cur = getCurrent();
-        int current = arr[cur];
-        synchronized (shared){
-            shared.setTakenNumbers(cur);
-            if(decider.isPrime(current)){
-                shared.setSemaphore();
+    private int getCurrent() {
+        for (int i = 0; i < len; i++) {
+            if (!takenNumbers[i]) {
+                return i;
             }
-        }notify();
+        }
+        return -1;
     }
 
-    public boolean threadPrime() {
-        //TODO: number of threads as an attribute
-        //here are 2 threads
+    public boolean threadPrime(int threadsNum, int[] arr) {
         takenNumbers = new boolean[len];
         Arrays.fill(takenNumbers, false);
-        WithThreads thread1 = new WithThreads(arr);
-        WithThreads thread2 = new WithThreads(arr);
-        thread1.start();
-        thread2.start();
-        //TODO: interrupt all threads if semaphore == 1
+        Running[] threads = new Running[threadsNum];
+        for (int i = 0; i < threadsNum; i++) {
+            threads[i] = new Running("thread " + i);
+        }
+        Thread.UncaughtExceptionHandler handler = (running, exception) -> {
+            exception.printStackTrace();
+            for (Running t : threads) {
+                t.interrupt();
+            }
+        };
+        for (Running t : threads) {
+            t.setUncaughtExceptionHandler(handler);
+        }
+        for (Running t : threads) {
+            t.start();
+        }
         return false;
     }
 }
