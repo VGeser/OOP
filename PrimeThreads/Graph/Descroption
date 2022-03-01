@@ -1,0 +1,8 @@
+0) The algorithm used for this task is caching some information for better performance. This test shows the speed of pre-calculating/caching
+1) Very small, tiny test
+2) Medium size test
+3) A huge test of identical values
+4) Small anti-quicksort like test
+5) Another medium size test, but a bit bigger
+6) Many values close to max int
+7) [5] (Basically, just one five)
