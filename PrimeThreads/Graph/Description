@@ -1,3 +1,5 @@
+OY - time in microseconds (10^-6)
+OX - test number
 0) The algorithm used for this task is caching some information for better performance. This test shows the speed of pre-calculating/caching
 1) Very small, tiny test
 2) Medium size test
