@@ -9,11 +9,13 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 class Test {
-    //private final Decider dec = Decider.getInstance();
+    private final Decider dec = Decider.getInstance();
     public static Stream<Arguments> argumentProvider() {
         int[] ar1 = new int[1000000];
         Arrays.fill(ar1, 13);
         ar1[99] = 4;
+        int[] ar2 = new int[1000000];
+        Arrays.fill(ar2, 46351);
         return Stream.of(
                 //test from specification
                 Arguments.of(new int[]{6, 8, 7, 13, 9, 4}, true),
@@ -49,6 +51,7 @@ class Test {
                         6999203,6999203,6999203,6999203,6999203,6999203
                 }, false),
                 Arguments.of(ar1, true),
+                Arguments.of(ar2, false),
                 Arguments.of(new int[]{103549, 3, Integer.MAX_VALUE, 3, 10000019},false),
                 Arguments.of(new int[]{102217, 102229, 102233, 102241, 102251, 10000019,
                         102259, 102293, 102299, 102301, 102317, 102329, 102337, 102359,
@@ -240,7 +243,7 @@ class Test {
     @ParameterizedTest
     @MethodSource("argumentProvider")
     void testWithThreads(int[] inArr, boolean res) {
-        byte[] quantity = {2, 4, 6, 8};
+        byte[] quantity = {2,4,6,8};
         for (byte num : quantity) {
             long start1 = System.nanoTime();
             WithThreads concurrent = new WithThreads(inArr);
