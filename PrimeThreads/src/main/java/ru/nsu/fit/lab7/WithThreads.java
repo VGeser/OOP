@@ -89,7 +89,7 @@ public class WithThreads {
         for (int i = 0; i < threadsNum; i+=2) {
             threads[i].start();
             try {
-                threads[j].sleep(30);
+                threads[j].sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
