@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - PizzeriaDispatcherTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>PizzeriaDispatcherTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/ru.nsu.fit.lab8.html">ru.nsu.fit.lab8</a> &gt; PizzeriaDispatcherTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">12.075s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">correctnessTest()</td>
+<td class="success">12.075s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>Got order 0
+Got order 1
+Got order 2
+Got order 3
+Got order 4
+Got order 5
+Got order 6
+Got order 7
+Got order 8
+Got order 9
+Got order 10
+Got order 11
+Got order 12
+Got order 13
+Got order 14
+Cooking order 6pool-1-thread-7
+Cooking order 3pool-1-thread-4
+Cooking order 1pool-1-thread-2
+Cooking order 5pool-1-thread-6
+Cooking order 0pool-1-thread-1
+Cooking order 10pool-1-thread-11
+Cooking order 9pool-1-thread-10
+Cooking order 4pool-1-thread-5
+Cooking order 7pool-1-thread-8
+Cooking order 8pool-1-thread-9
+Cooking order 2pool-1-thread-3
+Order 10 cooked
+Order 5 cooked
+Order 5 put to warehouse
+Cooking order 11pool-1-thread-6
+Order 10 put to warehouse
+Cooking order 12pool-1-thread-11
+Retrieved orders from warehouse2
+Order 10 taken to delivery
+Order 5 taken to delivery
+Order 9 cooked
+Order 9 put to warehouse
+Order 7 cooked
+Order 7 put to warehouse
+Cooking order 14pool-1-thread-8
+Retrieved orders from warehouse2
+Order 9 taken to delivery
+Order 7 taken to delivery
+Cooking order 13pool-1-thread-10
+Order 6 cooked
+Order 6 put to warehouse
+Retrieved orders from warehouse1
+Order 6 taken to delivery
+Order 8 cooked
+Order 8 put to warehouse
+Order 3 cooked
+Order 11 cooked
+Order 12 cooked
+Order 10 delivered
+Retrieved orders from warehouse1
+Order 8 taken to delivery
+Order 9 delivered
+Order 6 delivered
+Order 14 cooked
+Order 14 put to warehouse
+Order 3 put to warehouse
+Order 12 put to warehouse
+Order 13 cooked
+Order 13 put to warehouse
+Order 11 put to warehouse
+Retrieved orders from warehouse4
+Order 14 taken to delivery
+Order 3 taken to delivery
+Order 12 taken to delivery
+Order 13 taken to delivery
+Order 8 delivered
+Retrieved orders from warehouse1
+Order 11 taken to delivery
+Order 5 delivered
+Order 7 delivered
+Order 2 cooked
+Retrieved orders from warehouse1
+Order 2 taken to delivery
+Order 14 delivered
+Order 2 put to warehouse
+Order 2 delivered
+Order 11 delivered
+Order 3 delivered
+Order 0 cooked
+Retrieved orders from warehouse1
+Order 0 taken to delivery
+Order 0 put to warehouse
+Order 1 cooked
+Order 0 delivered
+Retrieved orders from warehouse1
+Order 1 taken to delivery
+Order 1 put to warehouse
+Order 4 cooked
+Retrieved orders from warehouse1
+Order 4 taken to delivery
+Order 12 delivered
+Order 1 delivered
+Order 4 put to warehouse
+Order 13 delivered
+Order 4 delivered
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Object.wait(Object.java:321)
+	at ru.nsu.fit.lab8.Containers.grabFromWarehouse(Containers.java:75)
+	at ru.nsu.fit.lab8.Delivery.run(Delivery.java:26)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Object.wait(Object.java:321)
+	at ru.nsu.fit.lab8.Containers.grabFromWarehouse(Containers.java:75)
+	at ru.nsu.fit.lab8.Delivery.run(Delivery.java:26)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Object.wait(Object.java:321)
+	at ru.nsu.fit.lab8.Containers.grabFromWarehouse(Containers.java:75)
+	at ru.nsu.fit.lab8.Delivery.run(Delivery.java:26)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Object.wait(Object.java:321)
+	at ru.nsu.fit.lab8.Containers.grabFromWarehouse(Containers.java:75)
+	at ru.nsu.fit.lab8.Delivery.run(Delivery.java:26)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 6.3</a> at 31 мар. 2022 г., 21:24:00</p>
+</div>
+</div>
+</body>
+</html>

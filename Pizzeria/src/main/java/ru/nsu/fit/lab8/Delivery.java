@@ -1,68 +1,45 @@
 package ru.nsu.fit.lab8;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import static java.lang.Thread.sleep;
-import static ru.nsu.fit.lab8.PizzeriaDispatcher.*;
 
 public class Delivery implements Runnable {
-    private int baggageCapacity;
-    private int[] baggage;
-    private int taken;
-    private Random r;
+    private final int[] baggage;
+    private final Random r;
+    private final Containers containers;
+    boolean stop;
 
-    public Delivery(int capacity) {
-        baggageCapacity = capacity;
+    public Delivery(int capacity, Containers containers) {
         baggage = new int[capacity];
-        taken = 0;
+        Arrays.fill(baggage, -1);
         r = new Random(777);
-    }
-
-    private void takeOrders() {
-        int i = 0;
-        synchronized (warehouse) {
-
-            while (!(taken < baggageCapacity || i < PizzeriaDispatcher.warehouseCapacity)) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (warehouse[i] != -1) {
-                    System.out.println("Order " + warehouse[i] + " taken to delivery");
-                    baggage[taken] = warehouse[i];
-                    taken++;
-                    busy--;
-                    warehouse[i] = -1;
-                }
-                i++;
-            }
-
-        }
-
+        this.containers = containers;
+        stop = false;
     }
 
     @Override
     public void run() {
-        synchronized (warehouse) {
-            while (!(busy > 0)) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        while (!stop) {
+            containers.grabFromWarehouse(baggage);
+            for (int order : baggage) {
+                if (order != -1) {
+                    System.out.println("Order " + order + " taken to delivery");
                 }
-            }takeOrders();
-            notify();
-        }
-        int temp = taken;
-        for (int i = 0; i < temp; i++) {
-            try {
-                sleep(r.nextInt(20));
-                System.out.println("Order " + baggage[i] + " delivered");
-                taken--;
-                baggage[i] = 0;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            }
+            int size = baggage.length;
+            for (int i = 0; i < size; i++) {
+                if (baggage[i] != -1) {
+                    try {
+                        sleep(r.nextInt(25));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Order " + baggage[i] + " delivered");
+                    containers.confirmOrder(baggage[i]);
+                    baggage[i] = -1;
+                }
             }
         }
     }
