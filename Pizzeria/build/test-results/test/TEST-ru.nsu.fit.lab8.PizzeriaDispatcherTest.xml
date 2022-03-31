@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.nsu.fit.lab8.PizzeriaDispatcherTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-31T14:23:48" hostname="VGESER-LAPTOP" time="12.075">
+  <properties/>
+  <testcase name="correctnessTest()" classname="ru.nsu.fit.lab8.PizzeriaDispatcherTest" time="12.075"/>
+  <system-out><![CDATA[Got order 0
+Got order 1
+Got order 2
+Got order 3
+Got order 4
+Got order 5
+Got order 6
+Got order 7
+Got order 8
+Got order 9
+Got order 10
+Got order 11
+Got order 12
+Got order 13
+Got order 14
+Cooking order 6pool-1-thread-7
+Cooking order 3pool-1-thread-4
+Cooking order 1pool-1-thread-2
+Cooking order 5pool-1-thread-6
+Cooking order 0pool-1-thread-1
+Cooking order 10pool-1-thread-11
+Cooking order 9pool-1-thread-10
+Cooking order 4pool-1-thread-5
+Cooking order 7pool-1-thread-8
+Cooking order 8pool-1-thread-9
+Cooking order 2pool-1-thread-3
+Order 10 cooked
+Order 5 cooked
+Order 5 put to warehouse
+Cooking order 11pool-1-thread-6
+Order 10 put to warehouse
+Cooking order 12pool-1-thread-11
+Retrieved orders from warehouse2
+Order 10 taken to delivery
+Order 5 taken to delivery
+Order 9 cooked
+Order 9 put to warehouse
+Order 7 cooked
+Order 7 put to warehouse
+Cooking order 14pool-1-thread-8
+Retrieved orders from warehouse2
+Order 9 taken to delivery
+Order 7 taken to delivery
+Cooking order 13pool-1-thread-10
+Order 6 cooked
+Order 6 put to warehouse
+Retrieved orders from warehouse1
+Order 6 taken to delivery
+Order 8 cooked
+Order 8 put to warehouse
+Order 3 cooked
+Order 11 cooked
+Order 12 cooked
+Order 10 delivered
+Retrieved orders from warehouse1
+Order 8 taken to delivery
+Order 9 delivered
+Order 6 delivered
+Order 14 cooked
+Order 14 put to warehouse
+Order 3 put to warehouse
+Order 12 put to warehouse
+Order 13 cooked
+Order 13 put to warehouse
+Order 11 put to warehouse
+Retrieved orders from warehouse4
+Order 14 taken to delivery
+Order 3 taken to delivery
+Order 12 taken to delivery
+Order 13 taken to delivery
+Order 8 delivered
+Retrieved orders from warehouse1
+Order 11 taken to delivery
+Order 5 delivered
+Order 7 delivered
+Order 2 cooked
+Retrieved orders from warehouse1
+Order 2 taken to delivery
+Order 14 delivered
+Order 2 put to warehouse
+Order 2 delivered
+Order 11 delivered
+Order 3 delivered
+Order 0 cooked
+Retrieved orders from warehouse1
+Order 0 taken to delivery
+Order 0 put to warehouse
+Order 1 cooked
+Order 0 delivered
+Retrieved orders from warehouse1
+Order 1 taken to delivery
+Order 1 put to warehouse
+Order 4 cooked
+Retrieved orders from warehouse1
+Order 4 taken to delivery
+Order 12 delivered
+Order 1 delivered
+Order 4 put to warehouse
+Order 13 delivered
+Order 4 delivered
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+]]></system-out>
+  <system-err><![CDATA[java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1627)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.takeFirst(LinkedBlockingDeque.java:485)
+	at java.base/java.util.concurrent.LinkedBlockingDeque.take(LinkedBlockingDeque.java:673)
+	at ru.nsu.fit.lab8.Containers.getOrder(Containers.java:46)
+	at ru.nsu.fit.lab8.Chef.run(Chef.java:30)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Object.wait(Object.java:321)
+	at ru.nsu.fit.lab8.Containers.grabFromWarehouse(Containers.java:75)
+	at ru.nsu.fit.lab8.Delivery.run(Delivery.java:26)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Object.wait(Object.java:321)
+	at ru.nsu.fit.lab8.Containers.grabFromWarehouse(Containers.java:75)
+	at ru.nsu.fit.lab8.Delivery.run(Delivery.java:26)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Object.wait(Object.java:321)
+	at ru.nsu.fit.lab8.Containers.grabFromWarehouse(Containers.java:75)
+	at ru.nsu.fit.lab8.Delivery.run(Delivery.java:26)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+java.lang.InterruptedException
+	at java.base/java.lang.Object.wait(Native Method)
+	at java.base/java.lang.Object.wait(Object.java:321)
+	at ru.nsu.fit.lab8.Containers.grabFromWarehouse(Containers.java:75)
+	at ru.nsu.fit.lab8.Delivery.run(Delivery.java:26)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+]]></system-err>
+</testsuite>
