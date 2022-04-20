@@ -53,22 +53,11 @@ public class PizzeriaDispatcher {
         for (Chef c : chefs) {
             c.stop = true;
         }
-        stop(chefExecutor);
+        chefExecutor.shutdownNow();
         for (Delivery d : delivs) {
             d.stop = true;
         }
-        stop(deliveryExecutor);
-    }
-
-    private void stop(ExecutorService pool) {
-        pool.shutdown();
-        try {
-            if (!pool.awaitTermination(5000, TimeUnit.MILLISECONDS)) {
-                pool.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            pool.shutdownNow();
-        }
+        deliveryExecutor.shutdownNow();
     }
 
 }

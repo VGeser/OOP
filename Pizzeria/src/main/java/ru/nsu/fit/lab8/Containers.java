@@ -1,5 +1,6 @@
 package ru.nsu.fit.lab8;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -32,7 +33,7 @@ public class Containers {
             try {
                 orderQueue.put(temp);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                return;
             }
             System.out.println("Got order " + temp);
             temp++;
@@ -55,7 +56,7 @@ public class Containers {
                             warehouse.offer(order);
                         }
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        return;
                     }
                 }
             }
@@ -64,21 +65,23 @@ public class Containers {
         System.out.println("Order " + order + " put to warehouse");
     }
 
-    void grabFromWarehouse(int[] baggage) {
+    int[] grabFromWarehouse(int len) {
+        int [] res = new int[len];
+        Arrays.fill(res, -1);
         synchronized (warehouse) {
             if (warehouse.isEmpty()) {
                 while (warehouse.isEmpty()) {
                     try {
                         warehouse.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        return res;
                     }
                 }
             }
-            int size = Math.min(baggage.length, warehouse.size());
+            int size = Math.min(len, warehouse.size());
             for (int i = 0; i < size; i++) {
                 try {
-                    baggage[i] = (int) warehouse.take();
+                    res[i] = (int) warehouse.take();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -86,6 +89,7 @@ public class Containers {
             warehouse.notify();
             System.out.println("Retrieved orders from warehouse" + size);
         }
+        return res;
     }
 
     void confirmOrder(int order) {

@@ -6,14 +6,13 @@ import java.util.Random;
 import static java.lang.Thread.sleep;
 
 public class Delivery implements Runnable {
-    private final int[] baggage;
+    private int capacity;
     private final Random r;
     private final Containers containers;
     boolean stop;
 
     public Delivery(int capacity, Containers containers) {
-        baggage = new int[capacity];
-        Arrays.fill(baggage, -1);
+        this.capacity = capacity;
         r = new Random(777);
         this.containers = containers;
         stop = false;
@@ -22,7 +21,7 @@ public class Delivery implements Runnable {
     @Override
     public void run() {
         while (!stop) {
-            containers.grabFromWarehouse(baggage);
+            int [] baggage = containers.grabFromWarehouse(capacity);
             for (int order : baggage) {
                 if (order != -1) {
                     System.out.println("Order " + order + " taken to delivery");

@@ -12,12 +12,12 @@ public class Chef implements Runnable {
         this.experience = experience;
         this.currentOrder = order;
         this.containers = containers;
-        stop = false;
+        this.stop = false;
     }
 
     @Override
     public void run() {
-        while (!stop) {
+        while (!stop) { //!Thread.currentThread().isInterrupted()
             System.out.println("Cooking order " + currentOrder + Thread.currentThread().getName());
             try {
                 sleep(experience);
