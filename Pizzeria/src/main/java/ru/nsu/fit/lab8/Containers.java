@@ -66,7 +66,7 @@ public class Containers {
     }
 
     int[] grabFromWarehouse(int len) {
-        int [] res = new int[len];
+        int[] res = new int[len];
         Arrays.fill(res, -1);
         synchronized (warehouse) {
             if (warehouse.isEmpty()) {

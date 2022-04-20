@@ -3,7 +3,6 @@ package ru.nsu.fit.lab8;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 
 public class PizzeriaDispatcher {
     private final int chefNum;
@@ -49,14 +48,8 @@ public class PizzeriaDispatcher {
 
     }
 
-    public void stop(){
-        for (Chef c : chefs) {
-            c.stop = true;
-        }
+    public void stop() {
         chefExecutor.shutdownNow();
-        for (Delivery d : delivs) {
-            d.stop = true;
-        }
         deliveryExecutor.shutdownNow();
     }
 
