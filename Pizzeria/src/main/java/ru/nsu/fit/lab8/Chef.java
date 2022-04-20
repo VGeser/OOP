@@ -6,18 +6,16 @@ public class Chef implements Runnable {
     private final int experience;
     private int currentOrder;
     private final Containers containers;
-    boolean stop;
 
     public Chef(int experience, int order, Containers containers) {
         this.experience = experience;
         this.currentOrder = order;
         this.containers = containers;
-        this.stop = false;
     }
 
     @Override
     public void run() {
-        while (!stop) { //!Thread.currentThread().isInterrupted()
+        while (!Thread.currentThread().isInterrupted()) {
             System.out.println("Cooking order " + currentOrder + Thread.currentThread().getName());
             try {
                 sleep(experience);
