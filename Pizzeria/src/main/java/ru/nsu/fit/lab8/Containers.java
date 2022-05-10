@@ -74,7 +74,7 @@ public class Containers {
                     try {
                         warehouse.wait();
                     } catch (InterruptedException e) {
-                        return res;
+                        return null;
                     }
                 }
             }
