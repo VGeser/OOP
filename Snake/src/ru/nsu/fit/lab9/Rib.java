@@ -1,11 +1,11 @@
 package ru.nsu.fit.lab9;
 
 public class Rib<T> {
-    public T getBody() {
+    T getBody() {
         return body;
     }
 
-    public void setBody(T body) {
+    void setBody(T body) {
         this.body = body;
     }
 
@@ -14,6 +14,7 @@ public class Rib<T> {
     private int ypos;
     private int oldXpos;
     private int oldYpos;
+
     Rib(int x, int y) {
         oldXpos = x;
         xpos = x;
@@ -21,25 +22,26 @@ public class Rib<T> {
         ypos = y;
     }
 
-    public void setPos(int x, int y) {
+    void setPos(int x, int y) {
         oldXpos = xpos;
         oldYpos = ypos;
         xpos = x;
         ypos = y;
     }
-    public int getXpos() {
+
+    int getXpos() {
         return xpos;
     }
 
-    public int getYpos() {
+    int getYpos() {
         return ypos;
     }
 
-    public int getOldXpos() {
+    int getOldXpos() {
         return oldXpos;
     }
 
-    public int getOldYpos() {
+    int getOldYpos() {
         return oldYpos;
     }
 }

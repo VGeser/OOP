@@ -1,25 +1,23 @@
 package ru.nsu.fit.lab9;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-
 import java.util.ArrayList;
 
 public class Snake<T> {
     private ArrayList<Rib<T>> body;
-    Snake(){
+
+    Snake() {
         body = new ArrayList<>();
     }
 
-    public ArrayList<Rib<T>> getBody() {
+    ArrayList<Rib<T>> getBody() {
         return body;
     }
 
-    public void cutTail(){
-        body.subList(1, body.size()).clear();
+    void grow(int x, int y) {
+        body.add(new Rib<T>(x, y));
     }
 
-    public Rib<T> getHead(){
+    Rib<T> getHead() {
         return body.get(0);
     }
 }
