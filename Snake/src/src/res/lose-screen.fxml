@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        prefHeight="400.0" prefWidth="600.0"
+        style="-fx-background-color: grey"
+        alignment="CENTER"
+        spacing="30">
+
+    <Label text="You lost"
+           alignment="CENTER"
+           style="-fx-text-fill: white; -fx-font-size: 30"/>
+
+    <Button text="Try again" alignment="CENTER" fx:id="startButton"
+            style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 25"/>
+
+</VBox>
