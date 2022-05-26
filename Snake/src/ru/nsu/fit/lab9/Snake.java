@@ -13,8 +13,8 @@ public class Snake<T> {
         return body;
     }
 
-    void grow(int x, int y) {
-        body.add(new Rib<T>(x, y));
+    void grow(Rib<T> rib) {
+        body.add(rib);
     }
 
     Rib<T> getHead() {
