@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,7 +28,10 @@ public class Controller {
     private int foodX;
     private int foodY;
 
-    public Controller() {
+    @FXML
+    private Button startButton;
+
+    public Controller(View v) {
         state = 0; //not started
         foodX = 0;
         foodY = 0;
@@ -35,7 +39,13 @@ public class Controller {
         deltaY = 0;
         snake = new Snake<>();
         r = new Random(2124);
-        view = new View(this, (Stage) startButton.getScene().getWindow());
+        this.view = v;
+    }
+
+    public void initialize(){
+        startButton.setOnAction(event -> {
+            this.onStartButtonClick();
+        });
     }
 
     private void updateFood() {
@@ -44,23 +54,29 @@ public class Controller {
         view.setFood(foodX, foodY);
     }
 
+    private Rib<Rectangle> nextRib(int x,int y){
+       Rectangle rect = new Rectangle(12,12, Color.BLUE);
+       //12 is size, not coordinates => one for all
+       Rib <Rectangle> res = new Rib<>(x,y);
+       res.setBody(rect);
+       return res;
+    }
 
-    @FXML
-    private Button startButton;
-
-    @FXML
     protected void onStartButtonClick() {
         view.makeField();
         updateFood();
-        snake.grow(r.nextInt(40), r.nextInt(40));
+        int xInit = r.nextInt(40);
+        int yInit = r.nextInt(40);
+        snake.grow(nextRib(xInit, yInit));
         curX = snake.getHead().getXpos();
         curY = snake.getHead().getYpos();
         view.setSnake(snake);
         state = 1;//playing
-        double loopSpeed = 1 / 10.0;
+        double loopSpeed = 1;//1 / 10.0;
         loop = new Timeline(new KeyFrame(Duration.seconds(loopSpeed),
                 event -> move()));
         loop.setCycleCount(Timeline.INDEFINITE);
+        loop.play();
     }
 
     private boolean crashedWall() {
@@ -83,7 +99,8 @@ public class Controller {
         return false;
     }
 
-    private boolean isTangled() {
+    /*private boolean isTangled() { //TODO: iterate without the head
+    //problem: starts from head, head is head? => always yes => always lose
         for (Rib<Rectangle> r : snake.getBody()) {
             int x = r.getXpos();
             int y = r.getYpos();
@@ -91,14 +108,15 @@ public class Controller {
                 return true;
         }
         return false;
-    }
+    }*/
 
     private boolean isFood() {
         return curX == foodX && curY == foodY;
     }
 
     private void move() {
-        if (crashedWall() || isTangled()) {
+        //(crashedWall() || isTangled())
+        if  (crashedWall()){
             die();
             return;
         }
@@ -107,7 +125,7 @@ public class Controller {
             Rib<Rectangle> r = snake.getBody().get(size - 1);
             int x = r.getOldXpos();
             int y = r.getOldYpos();
-            snake.grow(x, y);
+            snake.grow(nextRib(x, y));
             updateFood();
         }
         view.erase(snake);

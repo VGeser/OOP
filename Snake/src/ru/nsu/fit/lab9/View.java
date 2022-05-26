@@ -13,16 +13,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class View extends Application {
-    private final GridPane field;
-    private final Controller controller;
-    private final Stage stage;
+    private GridPane field;
+    private Controller controller;
     private Circle food;
-
-    public View(Controller c, Stage s) {
-        field = new GridPane();
-        this.controller = c;
-        this.stage = s;
-    }
+    private Stage stage;
 
     public static void main(String[] args) {
         launch(args);
@@ -30,11 +24,16 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("start-screen.fxml"));
+        controller = new Controller(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/res/start-screen.fxml"));
+        loader.setController(controller);
         Scene startScene = new Scene(loader.load());
+        this.stage = stage;
         stage.setScene(startScene);
         stage.setTitle("Little Snake");
+        stage.setWidth(600);
+        stage.setHeight(400);
+        field = new GridPane();
         stage.show();
     }
 
@@ -80,11 +79,15 @@ public class View extends Application {
     }
 
     void displayLost() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("lose-screen.fxml"));
+        controller = new Controller(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/res/lose-screen.fxml"));
+        loader.setController(controller);
         Scene loseScene = new Scene(loader.load());
+        stage.setScene(loseScene);
+        stage.setTitle("Little Snake");
         stage.setWidth(600);
         stage.setHeight(400);
-        stage.setScene(loseScene);
+        field = new GridPane();
+        stage.show();
     }
 }
