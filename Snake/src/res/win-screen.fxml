@@ -14,11 +14,11 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="CENTER" prefHeight="500.0" prefWidth="670.0" spacing="30" style="-fx-background-color: azure" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/javafx">
-        <Label alignment="CENTER" prefHeight="49.0" prefWidth="197.0" style="-fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );" text="You lost..." textFill="MEDIUMSLATEBLUE">
+        <Label alignment="CENTER" prefHeight="49.0" prefWidth="197.0" style="-fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );" text="You won!" textFill="MEDIUMSLATEBLUE">
             <font>
                 <Font name="Microsoft YaHei Light" size="35.0" />
             </font></Label>
-        <Button fx:id="startButton" alignment="CENTER" style="-fx-background-color: whitesmoke; -fx-text-fill: orchid;" text="Try again?" textFill="ORCHID">
+        <Button fx:id="startButton" alignment="CENTER" style="-fx-background-color: whitesmoke; -fx-text-fill: orchid;" text="One more?" textFill="ORCHID">
             <font>
                 <Font name="Microsoft YaHei Light" size="25.0" />
             </font></Button>
